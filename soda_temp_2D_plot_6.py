@@ -11,11 +11,14 @@ def soda_temp_plot(file_name,t,d):
     
     file = '/Users/yuewang/Documents/study/courses/OCVN689/project/'+ str(file_name)
     nc = netCDF4.Dataset(file)
+    dates=netCDF4.num2date(nc.variables['TIME1'][:],'seconds since 1916-01-02 12:00:00')
+    
     
     fig = plt.figure(figsize=(20,10))
     ax = fig.add_axes([0.1,0.1,0.8,0.8])
 
     temp = nc.variables['TEMP']
+    
 
     temp_0 = temp[t,d,:,:]
 
@@ -46,5 +49,5 @@ def soda_temp_plot(file_name,t,d):
     
     cbar = m.colorbar(cs,location='bottom', size="15%", pad='35%')
     cbar.set_label('Temperature(deg.C)')
-    ax.set_title('Sea Temperature at ' +str(Time[t])+ 'at depth of'+ str(DEPTH[d])+' m')
+    ax.set_title('Sea Temperature at ' +str(dates[t])+ 'at depth of'+ str(DEPTH[d])+' m')
     plt.show()
