@@ -40,10 +40,8 @@ def soda_temp_plot(file_name,t,d):
 
     lons, lats = m.makegrid(nx, ny)
     x, y = m(lons, lats)
-    #clevs = [0,6,30,60,90,150,210,270,330,390,450,510,570,630,690,750,870,990,1010,1200]
-    #clevs = [0,1,2.5,5,7.5,10,15,20,30,40,50,70,100,150,200,250,300,400,500,600,750]
+    
     cs = m.contourf(x,y,temp_0,cmap=cm.sstanom)
-    #cs = m.contourf(x,y,rainfall_annual)
     m.drawcoastlines()
     
     cbar = m.colorbar(cs,location='bottom', size="15%", pad='35%')
