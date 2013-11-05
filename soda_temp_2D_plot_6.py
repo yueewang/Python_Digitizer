@@ -24,7 +24,6 @@ def soda_temp_plot(file_name,t,d):
 
     lon = nc.variables['LON241_580'][:]
     lat = nc.variables['LAT142_161'][:]
-    Time = nc.variables['TIME1']
     DEPTH = nc.variables['DEPTH1_4']
 
 
@@ -39,8 +38,6 @@ def soda_temp_plot(file_name,t,d):
     m.drawmeridians(meridians,labels=[0,0,0,1],fontsize=10)
 
     ny = temp_0.shape[0]; nx =temp_0.shape[1]
-    lons, lats = m.makegrid(nx, ny)
-
     lons, lats = m.makegrid(nx, ny)
     x, y = m(lons, lats)
     
