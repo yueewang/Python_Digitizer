@@ -6,13 +6,14 @@ import netCDF4
 from mpl_toolkits.basemap import Basemap,cm
 import matplotlib.pyplot as plt 
 
-def soda_plot(url,variable,llat, ulat, llon, rlon,time,depth):
+def soda_plot(url,variable,llat, ulat, llon, rlon,time=3,depth=0):
     
     nc = netCDF4.Dataset(url)
     t  = time
     d  = depth
+    dep = nc.variables['DEPTH1_3'][:]
+    
     var = nc.variables[variable][t,d,:,:]
-#Q: do we need define t,d in function
     lon = nc.variables['LON'][:]
     lat = nc.variables['LAT'][:]
 
@@ -36,17 +37,17 @@ def soda_plot(url,variable,llat, ulat, llon, rlon,time,depth):
     plt.contourf(x,y,var,cmap=cm.sstanom)
     cb = plt.colorbar(orientation='horizontal')
     cb.set_label(r'Sea Surface Temperature (deg C)',fontsize=14,style='italic')
+    plt.title(str(variable)+' at Depth of '+str(dep[d])+' (m)')
     plt.show()
+    
     #plt.savefig('SST_globeplot_Hw3.png')
-## Do I need a title for the plot or a title for the whole plot?
 
 
-
-'''url = 'http://sodaserver.tamu.edu:80/opendap/TEMP/SODA_2.3.1_01-01_python.cdf'
+##########
+url = 'http://sodaserver.tamu.edu:80/opendap/TEMP/SODA_2.3.1_01-01_python.cdf'
 variable = 'TEMP'
-#nino 3.4 region
 llat = -5.
-####Q: range of latitude: 0-360, do we need a loop? transfore the latidue
 ulat = 5.
-llon = -170.
-rlon = -120.'''
+llon = 20.
+rlon = 180.
+soda_plot(url,variable,llat, ulat, llon, rlon,time=3,depth=0)
