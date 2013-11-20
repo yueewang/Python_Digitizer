@@ -12,6 +12,8 @@ def soda_plot(url,variable,llat, ulat, llon, rlon,time=3,depth=0):
     t  = time
     d  = depth
     dep = nc.variables['DEPTH1_3'][:]
+    dates= netCDF4.num2date(nc.variables['TIME1'][:],\
+        'seconds since 1916-01-02 12:00:00')
     
     var = nc.variables[variable][t,d,:,:]
     lon = nc.variables['LON'][:]
@@ -37,7 +39,7 @@ def soda_plot(url,variable,llat, ulat, llon, rlon,time=3,depth=0):
     plt.contourf(x,y,var,cmap=cm.sstanom)
     cb = plt.colorbar(orientation='horizontal')
     cb.set_label(r'Sea Surface Temperature (deg C)',fontsize=14,style='italic')
-    plt.title(str(variable)+' at Depth of '+str(dep[d])+' (m)')
+    plt.title(str(variable)+' at Depth of '+str(dep[d])+' (m) ('+ str(dates[t])+')')
     plt.show()
     
     #plt.savefig('SST_globeplot_Hw3.png')
