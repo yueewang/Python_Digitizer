@@ -37,9 +37,10 @@ def soda_plot(url,variable,llat, ulat, llon, rlon,time=3,depth=0):
 
     # plotting data on the map 
     plt.contourf(x,y,var,cmap=cm.sstanom)
-    cb = plt.colorbar(orientation='horizontal')
+    cb = plt.colorbar(orientation='horizontal',aspect=40)
     cb.set_label(r'Sea Surface Temperature (deg C)',fontsize=14,style='italic')
     plt.title(str(variable)+' at Depth of '+str(dep[d])+' (m) ('+ str(dates[t])+')')
+    plt.savefig(str(variable)+str(t)+'.png')
     plt.show()
     
     #plt.savefig('SST_globeplot_Hw3.png')
@@ -48,8 +49,8 @@ def soda_plot(url,variable,llat, ulat, llon, rlon,time=3,depth=0):
 ##########
 url = 'http://sodaserver.tamu.edu:80/opendap/TEMP/SODA_2.3.1_01-01_python.cdf'
 variable = 'TEMP'
-llat = -5.
-ulat = 5.
+llat = -50.
+ulat = 50.
 llon = 20.
 rlon = 180.
 soda_plot(url,variable,llat, ulat, llon, rlon,time=3,depth=0)
